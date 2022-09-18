@@ -1,6 +1,10 @@
-var jovens = []
-function guardar(){
 
+let jovens = JSON.parse(localStorage.getItem('jovens'))
+if(jovens == null){
+    jovens = []
+}
+
+function guardar(){
     let nome= document.getElementById('nome').value
     let cpf= document.getElementById('cpf').value
     let data= document.getElementById('data').value
@@ -22,4 +26,5 @@ function guardar(){
     }
     jovens.push(j_vens)
     console.log(j_vens)
+    localStorage.setItem("jovens",JSON.stringify(jovens))
 }

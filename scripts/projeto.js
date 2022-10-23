@@ -14,7 +14,7 @@ if(ehEdicao){
 
 
 
-function guardar(){
+function salvar(){
     let nome= document.getElementById('nome').value
     let cpf= document.getElementById('cpf').value
     let data= document.getElementById('data').value

@@ -6,6 +6,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>PROJETIN</title>
         <link rel="stylesheet" href="./estilos/bootstrap/css/bootstrap.min.css">
+        <style>
+            .container{
+                background-image:  url("imagens/jovem_aprendiz_2.jpg");
+                background-repeat: no-repeat, repeat;
+                background-position: center;
+                background-size: cover;
+            }
+        </style>
     </head>
     
     
@@ -40,21 +48,33 @@
         <form action="cadastro">
         <div class="form-check">
             <legend>Dados do Jovem</legend>
-            <label for="nome">nome</label>
+            <label for="nome">nome *</label>
             <input class="form-control" placeholder="nome do jovem" id="nome" type="text">
             <br>
-            <label for="cpf">CPF</label>
+            <div id="erro-nome" class="alert alert-danger fade show" role="alert">
+                Nome obrigatório !
+            </div>
+            <label for="cpf">CPF *</label>
             <input class="form-control" placeholder="cpf do jovem" id="cpf" type="text">
             <br>
+            <div id="erro-cpf" class="alert alert-danger fade show" role="alert">
+                cpf obrigatório !
+            </div>   
             <label for="data">Data de aniversario</label>
             <input class="form-control" placeholder="data de aniversario" id="data" type="text">
             <br>
-            <label for="celular">Telefone fixo / Celular</label>
+            <label for="celular">Telefone fixo / Celular *</label>
             <input class="form-control" placeholder="celular/tel.fixo" id="telefone"  type="text">
             <br>
-            <label for="email">E-mail</label>
+            <div id="erro-telefone" class="alert alert-danger fade show" role="alert">
+                telefone obrigatório !
+            </div>   
+            <label for="email">E-mail *</label>
             <input class="form-control" placeholder="email do jovem" id="email" type="text"> 
             <br>
+            <div id="erro-email" class="alert alert-danger fade show" role="alert">
+                email obrigatório !
+            </div>   
             <label for="endereço">Endereço completo(estado,cidade e cep)</label>
             <input class="form-control" placeholder="endereço(estado,cidade e cep)" id="endereço" type="text">
             <br>
@@ -69,6 +89,9 @@
             <br>
         </div>
     </form>
+    <div id="sucesso" class="alert alert-success fade show" role="alert">
+        Jovem cadastrado com sucesso !
+    </div>
 </div>
 </body>
 <script src="./scripts/projeto.js"></script>

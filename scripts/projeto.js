@@ -1,14 +1,19 @@
+const url = 'http://ntcursoapi-env.eba-hvwnzgx7.us-east-1.elasticbeanstalk.com/nt-curso-api/jovens/'
 
-let jovens = JSON.parse(localStorage.getItem('jovens'))
-if(jovens == null){
-    jovens = []
-}
 
-const indice = location.search.split('=')[1]
-const ehEdicao = indice !== undefined
-console.log(indice)
+const id = location.search.split('=')[1]
+const ehEdicao = id !== undefined
+console.log(id)
 if(ehEdicao){
-    preencheFormulario(indice)
+    preencheFormulario(id)
+    fetch(url + id)
+    .then(function(response) {
+      console.log('Encontrado jovem com id' + id)
+      return response.json()
+    })
+    .then(function(jovem){
+        preencheFormulario(jovem)
+    })
 } 
 
 
@@ -60,28 +65,33 @@ function salvar(){
         data: data,
         telefone: telefone,
         email: email,
-        endereço:endereço,
+        endereco:endereço,
         marca: marca,
         curriculo: curriculo,
     }
-    
+    let metodo
     if (ehEdicao){
-        jovens[indice]=j_vens
+        metodo ='PUT'
+        j_vens.id = id
     } else{
-        jovens.push(j_vens)   
+        metodo= 'POST'   
     }
 
     console.log(j_vens)
-    localStorage.setItem("jovens",JSON.stringify(jovens))
+
+    fetch(url, {method: metodo , headers:{'Content-Type': 'application/json'}, body:JSON.stringify(j_vens) })
+    .then(function(response) {
+      console.log('Salvo com sucesso', response)
+    })
+
     document.getElementById('sucesso').classList.remove('fade')
     setTimeout(() =>{
         document.getElementById('sucesso').classList.add('fade')
     }, 3000)
     Limpar()
 }
-function preencheFormulario(indice){
-    console.log('refazendo formulario do jovem: ' + indice)
-    let JovEm = jovens[indice]
+function preencheFormulario(JovEm){
+    console.log('refazendo formulario do jovem: ' + JovEm.id)
     console.log('Jovem: '+ JovEm.nome)
     document.getElementById('nome').value = JovEm.nome
     document.getElementById('cpf').value = JovEm.cpf
